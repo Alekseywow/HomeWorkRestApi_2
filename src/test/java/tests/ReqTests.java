@@ -36,7 +36,7 @@ public class ReqTests {
 
         UserResponseModel response =
                 step("Необходимо создать нового пользователя, указать имя и работу",
-                        () -> given()
+                        () -> given(requestSpec)
                                 .body(request)
                                 .contentType(JSON)
                                 .log().uri()
@@ -47,6 +47,7 @@ public class ReqTests {
                                 .then()
                                 .spec(getBaseResponseSpec(201))
                                 .extract().as(UserResponseModel.class));
+
                 step("В ответ вернулись указанные в запросе данные", () -> {
                     assertEquals(response.getName(), "Aleksey");
                     assertEquals(response.getJob(), "Aqa");
@@ -61,12 +62,12 @@ public class ReqTests {
         UserFullResponseModel response =
                 step("Получить пользователя по id",
                         () -> given(requestSpec)
-                            .contentType(JSON)
-                            .log().uri()
-                            .when()
-                            .get("/users/2")
-                            .then()
-                            .spec(getBaseResponseSpec(200))
+                                .contentType(JSON)
+                                .log().uri()
+                                .when()
+                                .get("/users/2")
+                                .then()
+                                .spec(getBaseResponseSpec(200))
                                 .extract().as(UserFullResponseModel.class));
 
                 step("Проверить, что в ответе вернулись данные о пользователе", () -> {
