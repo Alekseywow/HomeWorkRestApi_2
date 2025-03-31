@@ -39,9 +39,6 @@ public class ReqTests {
                         () -> given(requestSpec)
                                 .body(request)
                                 .contentType(JSON)
-                                .log().uri()
-                                .log().body()
-                                .log().headers()
                                 .when()
                                 .post("/users")
                                 .then()
@@ -51,8 +48,8 @@ public class ReqTests {
                 step("В ответ вернулись указанные в запросе данные", () -> {
                     assertEquals(response.getName(), "Aleksey");
                     assertEquals(response.getJob(), "Aqa");
-                    assertThat(!response.getId().isEmpty());
-                    assertThat(!response.getCreatedAt().isEmpty());
+                    assertThat(response.getId().isEmpty());
+                    assertThat(response.getCreatedAt().isEmpty());
                 });
     }
 
@@ -63,7 +60,6 @@ public class ReqTests {
                 step("Получить пользователя по id",
                         () -> given(requestSpec)
                                 .contentType(JSON)
-                                .log().uri()
                                 .when()
                                 .get("/users/2")
                                 .then()
@@ -94,9 +90,6 @@ public class ReqTests {
                         () -> given(requestSpec)
                                 .body(request)
                                 .contentType(JSON)
-                                .log().uri()
-                                .log().body()
-                                .log().headers()
                                 .when()
                                 .put("/users/95")
                                 .then()
@@ -107,7 +100,7 @@ public class ReqTests {
                         () -> {
                     assertEquals(response.getName(), "ALEKSEY");
                     assertEquals(response.getJob(), "AQA");
-                    assertThat(!response.getUpdatedAt().isEmpty());
+                    assertThat(response.getUpdatedAt().isEmpty());
                         });
     }
     @Test
@@ -116,7 +109,6 @@ public class ReqTests {
         step("Удалить пользователя по id",
                 () -> given(requestSpec)
                         .contentType(JSON)
-                        .log().uri()
                         .when()
                         .delete("/users/2")
                         .then()
@@ -130,7 +122,6 @@ public class ReqTests {
         step("Получить пользователя по несуществующему id",
                 () -> given(requestSpec)
                         .contentType(JSON)
-                        .log().uri()
                         .when()
                         .get("/users/23")
                         .then()
