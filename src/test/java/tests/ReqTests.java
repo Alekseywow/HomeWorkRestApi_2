@@ -26,14 +26,12 @@ public class ReqTests {
         RestAssured.baseURI = "https://reqres.in";
         RestAssured.basePath = "/api";
     }
-
     @Test
     @DisplayName("Проверить успешное создание пользователя")
     void successfulCreateNewUserTest() {
         UserRequestModel request = new UserRequestModel();
         request.setName("Aleksey");
         request.setJob("Aqa");
-
         UserResponseModel response =
                 step("Необходимо создать нового пользователя, указать имя и работу",
                         () -> given(requestSpec)
@@ -52,7 +50,6 @@ public class ReqTests {
                     assertThat(response.getCreatedAt().isEmpty());
                 });
     }
-
     @Test
     @DisplayName("Проверить успешное получение информацию о пользователе")
     void successfulRetrievalUserInformTest() {
@@ -75,9 +72,7 @@ public class ReqTests {
                     assertEquals(response.getSupport().getUrl(), "https://contentcaddy.io?utm_source=reqres&utm_medium=json&utm_campaign=referral");
                     assertEquals(response.getSupport().getText(), "Tired of writing endless social media content? Let Content Caddy generate it for you.");
                 });
-
     }
-
     @Test
     @DisplayName("Проверить обновление данных о пользователе")
     void successUpdateInfoUserTest() {
@@ -113,9 +108,7 @@ public class ReqTests {
                         .delete("/users/2")
                         .then()
                         .spec(getBaseResponseSpec(204)));
-
     }
-
     @Test
     @DisplayName("Проверить, что для незарегистрированного пользователя приходит статус код 404")
     void unsuccessfulUserNotFoundTest() {
@@ -127,6 +120,4 @@ public class ReqTests {
                         .then()
                         .spec(getBaseResponseSpec(404)));
     }
-
-
 }
