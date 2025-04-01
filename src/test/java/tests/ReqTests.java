@@ -46,8 +46,8 @@ public class ReqTests {
                 step("В ответ вернулись указанные в запросе данные", () -> {
                     assertEquals(response.getName(), "Aleksey");
                     assertEquals(response.getJob(), "Aqa");
-                    assertThat(response.getId().isEmpty());
-                    assertThat(response.getCreatedAt().isEmpty());
+                    assertThat(response.getId()).isNotEmpty();
+                    assertThat(response.getCreatedAt()).isNotEmpty();
                 });
     }
     @Test
