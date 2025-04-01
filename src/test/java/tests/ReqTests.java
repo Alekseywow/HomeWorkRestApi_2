@@ -96,7 +96,7 @@ public class ReqTests {
                         () -> {
                     assertEquals(response.getName(), "ALEKSEY");
                     assertEquals(response.getJob(), "AQA");
-                    assertThat(response.getUpdatedAt().isEmpty());
+                    assertThat(response.getUpdatedAt()).isNotEmpty();
                         });
     }
     @Test
