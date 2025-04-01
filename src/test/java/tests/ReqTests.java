@@ -48,6 +48,7 @@ public class ReqTests {
                     assertEquals(response.getJob(), "Aqa");
                     assertThat(response.getId()).isNotEmpty();
                     assertThat(response.getCreatedAt()).isNotEmpty();
+
                 });
     }
     @Test
